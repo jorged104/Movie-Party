@@ -1,17 +1,16 @@
 {
   "name": "movie-party",
-  "version": "1.0.0",
-  "description": "Servidor propio para ver peliculas con varias personas a",
-  "main": "index.js",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www"
   },
-  "keywords": [
-    "movies",
-    "party",
-    "stream",
-    "node"
-  ],
-  "author": "Jorge Nowell",
-  "license": "GPL-3.0"
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "hbs": "~4.0.4",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1"
+  }
 }
