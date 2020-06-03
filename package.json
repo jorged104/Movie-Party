@@ -1,0 +1,17 @@
+{
+  "name": "movie-party",
+  "version": "1.0.0",
+  "description": "Servidor propio para ver peliculas con varias personas a",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "movies",
+    "party",
+    "stream",
+    "node"
+  ],
+  "author": "Jorge Nowell",
+  "license": "GPL-3.0"
+}
