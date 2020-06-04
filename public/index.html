@@ -11,26 +11,20 @@
 
 	<body>
 
-		<center>
-			<video src="{{base_url}}/video" controls></video>
-		</center>
+			<video src="/video" controls></video>
+		
     <div id="app">
         {{hola_mundo}}
       <ul>
-        
+        <li v-for="item of messages">
+            {{item.user}} - {{item.message}}
+        </li>
       </ul>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     <script src="javascripts/app.js"></script>
-          <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-      <script>
-        var socket = io('http://localhost:3000/');
-          socket.on("message-from-server-to-client", function(msg) {
-         console(msg);
-      });
-      socket.emit('message-from-client-to-server', 'Hello World!');
-      </script>
-
+         
 	</body>
 
 </html>
