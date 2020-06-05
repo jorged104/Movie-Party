@@ -1,7 +1,7 @@
 let fs      = require('fs')
 let path    = require('path');
 let express = require('express');
-
+let manager = require('../videoManager');
 let router  = express.Router();
 
 //
@@ -10,7 +10,7 @@ let router  = express.Router();
 router.get('/', function(req, res, next) {
 
 
-	let file = './public/6.mp4';
+	let file = manager.getVideo();
 
 	fs.stat(file, function(err, stats) {
 		if(err)

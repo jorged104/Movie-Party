@@ -25,7 +25,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Admin <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/admin">Admin <span class="sr-only">(current)</span></a>
           </li>
         </ul>
 
@@ -54,7 +54,7 @@
           <div id="video_controls_bar">
            <button  class="btn btn-sm btn-info ml-1"  v-on:click="play"> Play </button>
            <button  class="btn btn-sm btn-info ml-1"  v-on:click="pause"> Pause </button>
-           <input id="seekslider" type="range" min="0" max="100" value="0" step="1">
+           <input id="seekslider" type="range" min="0" max="100" value="0" step="1" v-on:change="sendSeek">
            <button  class="btn btn-sm btn-info ml-1"  v-on:click="fullscreen"> [ ] </button>
           </div>
       

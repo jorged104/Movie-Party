@@ -15,6 +15,7 @@ const app = new Vue({
         newMessage: '',
         messages: [{user:"Admin", message: "Welcome" }],
         ready: false,
+        addControls: true,
     },
     created(){
         window.onload = ()=>{
@@ -30,16 +31,21 @@ const app = new Vue({
             });
         });
         socket.on('pause', (data)=>{
-            console.log('me mando pause');
             var vid = document.getElementById('vid');
             vid.pause();
         });
         socket.on('play', (data)=>{
-            console.log('me mando play');
             var vid = document.getElementById('vid');
+            if(this.addControls) {
+                vid.ontimeupdate = seektimeupdate;
+                this.addControls = false;
+            }
             vid.play();
         });
-        
+        socket.on('change_Seeker',(data)=>{
+            var vid = document.getElementById('vid');
+            vid.currentTime = data.seekto;
+        });
     },
     methods:{
         send(){
@@ -56,10 +62,7 @@ const app = new Vue({
             this.ready = true;
         },
         fullscreen(){
-            /*
-             var vid = document.getElementById('vid');
-            vid.ontimeupdate = seektimeupdate;
-            */
+            var vid = document.getElementById('vid');
             if(vid.requestFullScreen){
                 vid.requestFullScreen();
             } else if(vid.webkitRequestFullScreen){
@@ -67,8 +70,13 @@ const app = new Vue({
             } else if(vid.mozRequestFullScreen){
                 vid.mozRequestFullScreen();
             }
+        },
+        sendSeek(){
+            var vid = document.getElementById('vid');
+            var seekslider = document.getElementById('seekslider');
+            var seekto = vid.duration * (seekslider.value / 100);
+            socket.emit('change_Seeker', {seekto: seekto })
         }
-        
         
     }
     
