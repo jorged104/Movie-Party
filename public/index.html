@@ -4,22 +4,98 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="description" content="">
+    <meta name="description" content="">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
 		<title>Movie Time</title>
 	</head>
 
-
+<style>
+  ::-webkit-media-controls {
+  display:none !important;
+}
+</style>
 	<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Movie </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Admin <span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
 
-			<video src="/video" controls></video>
-		
-    <div id="app">
-        {{hola_mundo}}
-      <ul>
-        <li v-for="item of messages">
-            {{item.user}} - {{item.message}}
-        </li>
-      </ul>
+      </div>
+    </nav>
+    <div id="app" class=" container col-9">
+      
+      <div class="container col-9 ">
+        <div v-if="!ready">
+          <h4>Enter your username</h4>
+          <form @submit.prevent="addUser">
+              <div class="form-group row">
+                  <input type="text" class="form-control col-9" v-model="user"
+                      placeholder="Enter username here">
+                  <input type="submit" value="Join" class="btn btn-sm btn-info ml-1"   v-on:click="join">
+
+              </div>
+          </form>
+      </div>
+      <div v-if="ready" >
+        <div class="embed-responsive embed-responsive-16by9">
+          <video id ="vid"  class="embed-responsive-item" >
+            <source src="/video"  autostart="false" >
+          </video>
+        </div>
+          <div id="video_controls_bar">
+           <button  class="btn btn-sm btn-info ml-1"  v-on:click="play"> Play </button>
+           <button  class="btn btn-sm btn-info ml-1"  v-on:click="pause"> Pause </button>
+           <input id="seekslider" type="range" min="0" max="100" value="0" step="1">
+           <button  class="btn btn-sm btn-info ml-1"  v-on:click="fullscreen"> [ ] </button>
+          </div>
+      
+      <div class="w-100 p-3"></div>
+      <div class="form-group ">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">User</span>
+          <input type="text" class="form-control "  v-model="user"></input>
+        </div>
+       
+      </div>
+
+      <div class="card bg-info" >
+        <ul class="list-group list-group-flush text-right">
+          <li class="list-group-item" v-for="item of messages">
+            <span class="float-left">
+                {{item.user}}
+               <small> {{item.message}} </small>
+            </span> 
+          </li>
+        </ul>
+
+        <div class="card-body">
+          
+          <input type="text"  class="form-control"  v-model="newMessage" placeholder="Enter message here" @keyup.enter="send"></input>
+          <button  class="btn btn-sm btn-info ml-1"  v-on:click="send"> Enviar</button>
+       
+        </div>
+    </div>
+    </div>
+  </div>
+</div>
+    <div class="card">
+      <div class="card-header">
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Creado</h5>
+        <p class="card-text">Jorge Nowell 
+          <a href="https://github.com/jorged104">https://github.com/jorged104</a>
+        </p>
+      </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
