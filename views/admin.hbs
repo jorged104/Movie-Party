@@ -10,17 +10,16 @@
 
 
 	<body>
-
-		<center>
-			<video src="{{base_url}}/video" controls></video>
-		</center>
-    <div id="app">
-        {{hola_mundo}}
-      <ul>
+        <ul class="list-group">
+		    {{#each post.files}}
+		<li>{{this}}</li>
+					{{/each}}
+         </ul>
+      
         
       </ul>
     </div>
-¿
+
           <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 	</body>
 
