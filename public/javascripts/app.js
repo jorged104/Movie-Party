@@ -46,6 +46,11 @@ const app = new Vue({
             var vid = document.getElementById('vid');
             vid.currentTime = data.seekto;
         });
+        socket.on('change_video',(data)=>{
+            var vid = document.getElementById('vid');
+            vid.load();
+            location.reload()
+        });
     },
     methods:{
         send(){
@@ -60,6 +65,7 @@ const app = new Vue({
         },
         join(){
             this.ready = true;
+            socket.emit('chat message', {user: 'Admin',message : 'Se unio: '+this.user});
         },
         fullscreen(){
             var vid = document.getElementById('vid');

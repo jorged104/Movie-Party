@@ -3,7 +3,7 @@ var router = express.Router();
 const fileUpload = require('express-fileupload');
 const path = require('path');
 const fs = require('fs');
-
+let manager = require('../videoManager');
 /* GET users listing. */
 router.get('/', function(req, res, next) {
  
@@ -14,11 +14,13 @@ router.get('/', function(req, res, next) {
                 return console.log('Unable to scan directory: ' + err);
             } 
             res.render('admin', {layout : 'index', 
-                    post: {files: files}
+                    post: {files: files},
+                    videoactual : manager.getVideo()
                 });
         });  
     }
     else{
+        console.log(' porque no llega aqui')
         res.render('loginAdmin',  {layout : 'index'});
     }
 
@@ -43,8 +45,32 @@ router.post('/auth', function(request, response) {
 		response.end();
 	}
 });
+//setArchivo
 
+router.post('/setArchivo', function(request, response,next) {
+    var a = request.body.archivo;
+    manager.setVideoStreem(a);
+    response.redirect('/admin');
+});
 
+router.post('/upload-video', function(req, res,next)  {
+    console.log(req.files)
 
-  
+        if(!req.files) {
+            res.send({
+                status: false,
+                message: 'No file uploadedsad'
+            });
+        } else {
+            let archivo = req.files.video;
+            archivo.mv('public/uploads/' + archivo.name,function(err) {
+                if (err)
+                  return res.status(500).send(err);
+            
+                res.send('File uploaded!');
+              });
+        }
+
+});
+
 module.exports = router;

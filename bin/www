@@ -40,9 +40,13 @@ io.on('connection', (socket) => {
  socket.on('change_Seeker', (data) => {
     io.emit('change_Seeker',data);
   });
+  socket.on('change_video',(data) =>{
+    io.emit('change_video');
+  })
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
+  
 });
 /**
  * Listen on provided port, on all network interfaces.

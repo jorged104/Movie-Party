@@ -6,6 +6,7 @@ let bodyParser = require('body-parser');
 var logger = require('morgan');
 var session = require('express-session');
 const handlebars = require('express-handlebars');
+const fileUpload = require('express-fileupload');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -26,6 +27,7 @@ extname: 'hbs'
 
 app.use(cors());
 app.use(logger('dev'));
+app.use(fileUpload());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());

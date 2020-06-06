@@ -1,26 +1,37 @@
-<html lang="en">
-
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="description" content="">
-		<title>Movie Time</title>
-	</head>
-
-
-	<body>
-        <ul class="list-group">
+ <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+<script>
+	var socket = io();
+function setValue(archivo){
+   var valor = document.getElementById('archivo');
+    var formulario_envio = document.getElementById('formulario_envio');
+   valor.value = archivo;
+ 	socket.emit('change_video');
+	 
+	formulario_envio.submit();
+}
+</script>
+<div class=" container col-9">
+<spam>
+	Transmision actual
+</spam>
+<span>{{videoactual}}</span>
+	 <form action="/admin/setArchivo" method="POST" id="formulario_envio">
+		<input type="hidden" id="archivo" value="hola" name="archivo">
+	
+        <ul class="list-group list-group-flush text-right">
 		    {{#each post.files}}
-		<li>{{this}}</li>
-					{{/each}}
+		<li class="list-group-item">
+			{{this}}
+		 <button type="submit" class="btn btn-primary" onclick="setValue('{{this}}')">
+			 Transmitir 
+		 </button>
+		</li>
+			{{/each}}
          </ul>
       
-        
-      </ul>
-    </div>
-
-          <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-	</body>
-
-</html>
+    </form>
+ <form action="/admin/upload-video" method="POST"  enctype="multipart/form-data" >
+	<input type="file" name="video" id="video">
+<input type="submit" value="Upload Image" name="submit">
+ </form>    
+</div>

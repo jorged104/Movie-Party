@@ -1,7 +1,8 @@
-const videoStream = './public/6.mp4';
+let videoStream = './public/uploads/6.mp4';
 
 function setVideoStreem(video ){
-    videoStream = video;
+  
+    videoStream = './public/uploads/'+video;
 }
 function getVideo(){
     return videoStream;

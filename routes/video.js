@@ -8,10 +8,8 @@ let router  = express.Router();
 //	Stream the video
 //
 router.get('/', function(req, res, next) {
-
-
 	let file = manager.getVideo();
-
+	console.log(file)
 	fs.stat(file, function(err, stats) {
 		if(err)
 		{
