@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www --exec babel-node",
+    "start": "node ./bin/www --exec babel-node",
     "dev": "nodemon ./bin/www --exec babel-node"
   },
   "dependencies": {
