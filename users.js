@@ -2,7 +2,6 @@ const users = [];
 
 const adduser = ({id, name }) => {
     name = name.trim().toLowerCase();
-
     const exist = users.find( (user)=> user === name );
     if(exist) return { error: 'User is taken'};
 
